@@ -1,0 +1,126 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "capture-markdown",
+  "title": "Markshot",
+  "description": "Capture a screen region as structured Markdown using your signed-in Codex CLI or OpenAI API.",
+  "icon": "command-icon.png",
+  "author": "hannes",
+  "categories": [
+    "Productivity",
+    "Developer Tools"
+  ],
+  "license": "MIT",
+  "platforms": [
+    "macOS"
+  ],
+  "engines": {
+    "node": ">=22.22.2"
+  },
+  "preferences": [
+    {
+      "name": "provider",
+      "title": "AI Provider",
+      "description": "Codex uses its existing login. OpenAI API uses your own API key; providers never switch automatically.",
+      "type": "dropdown",
+      "required": true,
+      "default": "codex",
+      "data": [
+        {
+          "title": "Codex CLI (Existing Login)",
+          "value": "codex"
+        },
+        {
+          "title": "OpenAI API",
+          "value": "openai-api"
+        }
+      ]
+    },
+    {
+      "name": "codexPath",
+      "title": "Codex Command Path",
+      "description": "Optional absolute path or ~/ path. Leave empty to find the installed codex command.",
+      "type": "textfield",
+      "required": false
+    },
+    {
+      "name": "codexModel",
+      "title": "Codex Model",
+      "description": "Default: gpt-6-luna, also used when blank. Fast mode enabled (2.5x subscription usage). Set another vision-capable Codex model if needed.",
+      "type": "textfield",
+      "required": false,
+      "default": "gpt-6-luna"
+    },
+    {
+      "name": "codexReasoningEffort",
+      "title": "Codex Reasoning Effort",
+      "description": "Codex only. Default: Low for faster transcription. Medium spends more time reasoning about the screenshot.",
+      "type": "dropdown",
+      "required": true,
+      "default": "low",
+      "data": [
+        {
+          "title": "Low (Faster)",
+          "value": "low"
+        },
+        {
+          "title": "Medium (More Reasoning)",
+          "value": "medium"
+        }
+      ]
+    },
+    {
+      "name": "openaiApiKey",
+      "title": "OpenAI API Key",
+      "description": "Only needed when AI Provider is OpenAI API",
+      "type": "password",
+      "required": false
+    },
+    {
+      "name": "openaiModel",
+      "title": "OpenAI Model",
+      "description": "Vision-capable Responses API model, only used with OpenAI API",
+      "type": "textfield",
+      "required": false,
+      "default": "gpt-5-mini"
+    }
+  ],
+  "commands": [
+    {
+      "name": "capture-markdown",
+      "title": "Capture Region as Markdown",
+      "description": "Capture a selected screen area and copy structured markdown to clipboard",
+      "mode": "no-view"
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^2.12.1"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "^2.2.0",
+    "@types/node": "26.6.5",
+    "@types/react": "19.3.0",
+    "@typescript/native": "npm:typescript@^7.0.2",
+    "eslint": "^10.15.0",
+    "esbuild": "^0.28.2",
+    "prettier": "^3.10.1",
+    "tsx": "^4.23.15",
+    "typescript": "npm:@typescript/typescript6@6.0.2"
+  },
+  "overrides": {
+    "@typescript-eslint/typescript-estree": {
+      "minimatch": "11.0.1"
+    }
+  },
+  "scripts": {
+    "build": "ray build -e dist -o dist",
+    "dev": "ray develop",
+    "fix-lint": "ray lint --fix",
+    "lint": "ray lint",
+    "typecheck": "node node_modules/@typescript/native/bin/tsc --noEmit",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "format:check": "prettier --check .",
+    "check": "npm run typecheck && npm test && npm run lint && npm run format:check && npm run build",
+    "prepublishOnly": "echo \"Use npm run publish to publish to Raycast Store\" && exit 1",
+    "publish": "ray publish"
+  }
+}

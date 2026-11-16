@@ -1,0 +1,19 @@
+# dependencies
+/node_modules
+/dist
+/output
+/tmp
+
+# Raycast specific files
+raycast-env.d.ts
+.raycast-swift-build
+.swiftpm
+compiled_raycast_swift
+
+# misc
+.DS_Store
+
+# local env files
+.env
+.env.*
+!.env.example
