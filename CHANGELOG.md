@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 
+- Remove the obsolete OCR-correction instruction, consolidate transcription guidelines in the main prompt, and shorten the user message while preserving table/header guidance.
 - Keep notification failures from interrupting transcription, clipboard copying or error feedback.
 - Invoke TypeScript 7 explicitly so the compatibility compiler cannot shadow the native checker.
 - Enable Codex Fast mode for transcription and show its subscription usage multiplier in model settings.
